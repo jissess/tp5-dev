@@ -68,6 +68,7 @@ class Login
      */
     public function logout()
     {
+//        var_dump(\Cache::store('array')->get('user'));exit();
         return responseSuccess([]);
     }
 }
