@@ -12,5 +12,11 @@ Route::group('api', function () {
     Route::group('admin', function () {
         Route::get('test', 'test/index');
         Route::post('login', 'login/login');
+
+        $loginRoute = function () {
+            Route::post('logout', 'login/logout');
+        };
+
+        Route::group(['middleware' => ['jwt-verify']], $loginRoute);
     })->prefix('admin/');
 });
