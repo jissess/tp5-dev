@@ -17,7 +17,7 @@ class User extends Model
      * @param array $param 用户提交的账号和密码
      * @return array|bool
      */
-     public static function checkUser($param = [])
+     public static function login($param = [])
      {
          $user = User::where([
              'status' => 1,

@@ -23,7 +23,7 @@ class Login
     public function login(Request $request)
     {
         $input = $request->post();
-        $user = User::checkUser($input);
+        $user = User::login($input);
         if (!$user) {
             return responseFail('not find user');
         }
