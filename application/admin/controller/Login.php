@@ -65,7 +65,7 @@ class Login
     }
 
     /**
-     * 退出接口
+     * 退出成功返回空数组
      * @return \think\response\Json
      */
     public function logout()

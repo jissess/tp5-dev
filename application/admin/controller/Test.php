@@ -1,16 +1,10 @@
 <?php
-namespace app\admin\controller;
 
-use think\Cache;
+namespace app\admin\controller;
 
 class Test
 {
-    public function index()
-    {
-        echo '这是后台的index方法';
-    }
-
-    public function test1()
+    public function test()
     {
         $user = getUser();
         var_dump($user);
