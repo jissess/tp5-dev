@@ -22,7 +22,7 @@ class User extends Model
          $user = User::where([
              'status' => 1,
              'user_code' => $param['user_code'],
-             'pwd' => $param['pwd']
+             'password' => md5($param['password'])
          ])->find();
 
          if (empty($user)) {
