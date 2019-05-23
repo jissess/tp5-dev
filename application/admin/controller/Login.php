@@ -70,7 +70,7 @@ class Login
      */
     public function logout()
     {
-        \Cache::store('redis')->set(getUser()->id, '');
+        \Cache::store('redis')->set(getUser()->id, '', 60);
 
         return responseSuccess([]);
     }
