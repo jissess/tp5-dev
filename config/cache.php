@@ -22,4 +22,15 @@ return [
     'prefix' => '',
     // 缓存有效期 0表示永久缓存
     'expire' => 0,
+
+    'redis'	=>	[
+        'type'	=>	'redis',
+        'host'	=>	'127.0.0.1',
+        'port' => 6379,
+        'password' => null,
+        // 全局缓存有效期（0为永久有效）
+        //        'expire'=>  0,
+        // 缓存前缀
+        'timeout'=> 3600
+    ],
 ];

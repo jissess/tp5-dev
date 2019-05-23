@@ -15,7 +15,15 @@ class JWTVerify
         $jwt_token = trim(str_replace('Bearer', '', $token));
         try {
             $jwt_value = (array)JWT::decode($jwt_token, $key, [$alg]);
-            Cache::store('array')->set('user',$jwt_value['sub']);
+            if ($jwt_value['exp'] < time()) {
+                return responseFail('Authorization has expired. Please log in again.');
+            }
+
+            $token = \Cache::store('redis')->get($jwt_value['sub']->id);
+            if (empty($token)) {
+                return responseFail('Please log in again.');
+            }
+            Cache::store('array')->set('user', $jwt_value['sub']);
         } catch (\InvalidArgumentException $e) {
             return responseFail($e->getMessage());
         } catch (\UnexpectedValueException $e) {

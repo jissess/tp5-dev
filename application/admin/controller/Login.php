@@ -29,6 +29,8 @@ class Login
         }
         $token = $this->createJwtToken($user);
 
+        \Cache::store('redis')->set("{$user['id']}","{$token}");
+
         return responseSuccess([$token]);
     }
 
@@ -68,7 +70,8 @@ class Login
      */
     public function logout()
     {
-//        var_dump(\Cache::store('array')->get('user'));exit();
+        \Cache::store('redis')->set(getUser()->id, '');
+
         return responseSuccess([]);
     }
 }

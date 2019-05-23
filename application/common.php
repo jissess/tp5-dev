@@ -1,5 +1,10 @@
 <?php
 
+function getUser()
+{
+    return \Cache::store('array')->get('user');
+}
+
 function responseSuccess(Array $params = [], $msg = '成功', $code = 200)
 {
     return json([

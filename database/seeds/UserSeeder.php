@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
     {
         $data = [
             [
-                'user_code' => 'bb',
-                'user_name' => 'bb',
+                'user_code' => 'admin',
+                'user_name' => 'admin',
                 'gender' => '1',
                 'photo' => '',
                 'token' => '',
@@ -26,8 +26,8 @@ class UserSeeder extends Seeder
                 'update_time' => date('Y-m-d', time()),
             ],
             [
-                'user_code' => 'cc',
-                'user_name' => 'cc',
+                'user_code' => 'aa',
+                'user_name' => 'aa',
                 'gender' => '1',
                 'photo' => '',
                 'token' => '',
