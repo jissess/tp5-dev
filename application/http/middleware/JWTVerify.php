@@ -21,7 +21,7 @@ class JWTVerify
 
             $token = \Cache::store('redis')->get($jwt_value['sub']->id);
             if (empty($token)) {
-                return responseFail('Please log in again.');
+                return responseFail('You have logged out. Please log in again.');
             }
             Cache::store('array')->set('user', $jwt_value['sub']);
         } catch (\InvalidArgumentException $e) {
