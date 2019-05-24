@@ -2,11 +2,15 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\User;
+
 class Test
 {
     public function test()
     {
         $user = getUser();
-        var_dump($user);
+        $users = User::getUsers([], [], ['id' => 'desc']);
+
+        return responseSuccess($users);
     }
 }

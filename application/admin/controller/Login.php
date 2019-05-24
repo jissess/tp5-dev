@@ -46,7 +46,7 @@ class Login
         $payload  = [
             'iss'=>'tp5.iss',
             'aud'=>'tp5.aud',
-            'exp'=>$this->timestamp + 600,
+            'exp'=>$this->timestamp + 6000,
             'iat'=>$this->timestamp,
             'sub' => [
                 "id" => $userInfo['id'] ?? '',
