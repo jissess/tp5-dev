@@ -102,4 +102,22 @@ class Users extends Model
 
         return true;
     }
+
+    public static function getUser($id)
+    {
+        return self::where(['id' => $id])->find()->toArray();
+    }
+
+    public static function savePhoto($id, $path)
+    {
+        $user = new Users();
+        $res = $user->save([
+            'photo'  =>  $path,
+        ],['id' => $id]);
+        if (!$res) {
+            return false;
+        }
+
+        return true;
+    }
 }

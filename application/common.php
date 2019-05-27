@@ -34,3 +34,13 @@ function returnArr($msg = '', $code = 500)
 {
     return ['status_code' => $code, 'msg' => $msg];
 }
+
+function saveToPublic()
+{
+    return '../public';
+}
+
+function getUrl(\think\Request $request)
+{
+    return $request->domain();
+}

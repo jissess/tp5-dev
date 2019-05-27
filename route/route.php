@@ -17,6 +17,7 @@ Route::group('api', function () {
 
         //用户管理
         Route::resource('user', 'user')->middleware('jwt-verify');
+        Route::post('user/upload', 'user/upload')->middleware('jwt-verify');
 
     })->prefix('admin/');
 });
