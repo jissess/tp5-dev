@@ -2,10 +2,13 @@
 
 namespace app\model\account;
 
+use app\admin\validate\LoginValidate;
+use app\admin\validate\StoreUserValidate;
 use think\Model;
 
-class User extends Model
+class Users extends Model
 {
+    const STATUS_NORMAL = 1;
     // 设置当前模型对应的完整数据表名称
     protected $table = 'user';
 
@@ -19,7 +22,11 @@ class User extends Model
      */
     public static function login($param = [])
     {
-        $user = User::where([
+        $validate = new LoginValidate();
+        if (!$validate->check($param)) {
+            return returnArr("{$validate->getError()}");
+        }
+        $user = self::where([
             'status' => 1,
             'user_code' => $param['user_code'],
             'password' => md5($param['password'])
@@ -42,7 +49,7 @@ class User extends Model
      */
     public static function getUsers($cond = [], $field = [], $order = [], $limit = 10, $page = 1)
     {
-        $user = new User();
+        $user = new Users();
         $where1 = array('status' => 1);
         $where = array_merge($cond, $where1);
 
@@ -51,6 +58,10 @@ class User extends Model
         }
         if (!empty($order)) {
             $user = $user->order($order);
+        }
+        if (isset($where['user_name'])) {
+            $user = $user->where('user_name', 'like', "{$where['user_name']}%");
+            unset($where['user_name']);
         }
 
         $pages = getPage($user, $where, $limit);
@@ -68,5 +79,27 @@ class User extends Model
         }
 
         return $data;
+    }
+
+    public static function saveData($param = [])
+    {
+        $validate = new StoreUserValidate();
+        if (!$validate->check($param)) {
+            return returnArr("{$validate->getError()}");
+        }
+
+        $user = new Users([
+            'user_code'  =>  $param['user_code'],
+            'password' =>  md5('123456'),
+            'user_name' =>  $param['user_name'],
+            'gender' =>  $param['gender'],
+            'status' =>  self::STATUS_NORMAL,
+        ]);
+        $res = $user->save();
+        if (!$res) {
+            return false;
+        }
+
+        return true;
     }
 }

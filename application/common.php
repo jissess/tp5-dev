@@ -29,3 +29,8 @@ function responseFail($msg = '', $code = 500)
         'msg' => $msg,
     ]);
 }
+
+function returnArr($msg = '', $code = 500)
+{
+    return ['status_code' => $code, 'msg' => $msg];
+}

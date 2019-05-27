@@ -1,8 +1,7 @@
 <?php
 namespace app\admin\controller;
 
-
-use app\model\account\User;
+use app\model\account\Users;
 use Firebase\JWT\JWT;
 use think\Request;
 
@@ -24,9 +23,12 @@ class Login
     public function login(Request $request)
     {
         $input = $request->post();
-        $user = User::login($input);
+        $user = Users::login($input);
         if (!$user) {
             return responseFail('not find user');
+        }
+        if (!empty($user['status_code']) && isset($user['status_code'])) {
+            return responseFail($user['msg']);
         }
         $token = $this->createJwtToken($user);
 

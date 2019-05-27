@@ -10,10 +10,13 @@ Route::group('api', function () {
 
     //后台页面
     Route::group('admin', function () {
-        Route::post('login', 'login/login');
 
+        //登录、退出
+        Route::post('login', 'login/login');
         Route::post('logout', 'login/logout')->middleware('jwt-verify');
-        Route::get('test', 'test/test')->middleware('jwt-verify');
+
+        //用户管理
+        Route::resource('user', 'user')->middleware('jwt-verify');
 
     })->prefix('admin/');
 });
