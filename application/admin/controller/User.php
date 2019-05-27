@@ -13,6 +13,12 @@ class User extends Controller
         $input = $request->get();
         $users = Users::getUsers(['user_name' => $input['user_name'] ?? ''], [], ['id' => 'desc'], $input['limit'] ?? 10, $input['page'] ?? 1);
 
+        foreach ($users['list'] as $key => $val) {
+            if (!empty($val['photo'])) {
+                $users['list'][$key]['photo'] = getUrl($request) . $val['photo'];
+            }
+        }
+
         return responseSuccess($users);
     }
 
@@ -31,9 +37,10 @@ class User extends Controller
         return responseSuccess();
     }
 
-    public function read($id)
+    public function read(Request $request,$id)
     {
         $res = Users::getUser($id);
+        (!empty($res['photo'])) ? $res['photo'] = getUrl($request) . $res['photo'] : '';
 
         return responseSuccess($res);
     }
