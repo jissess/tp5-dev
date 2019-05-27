@@ -1,7 +1,8 @@
 <?php
 namespace app\admin\controller;
 
-use app\admin\model\User;
+
+use app\model\account\User;
 use Firebase\JWT\JWT;
 use think\Request;
 

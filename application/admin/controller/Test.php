@@ -2,7 +2,7 @@
 
 namespace app\admin\controller;
 
-use app\admin\model\User;
+use app\model\account\User;
 
 class Test
 {
