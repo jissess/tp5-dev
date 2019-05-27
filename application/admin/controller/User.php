@@ -45,7 +45,7 @@ class User extends Controller
         return responseSuccess($res);
     }
 
-    public function upload(Request $request)
+    public function upload()
     {
         $file = request()->file('image');
         $dir = 'upload/user_img';
