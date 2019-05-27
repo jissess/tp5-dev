@@ -37,7 +37,7 @@ class User extends Controller
         return responseSuccess();
     }
 
-    public function read(Request $request,$id)
+    public function read(Request $request, $id)
     {
         $res = Users::getUser($id);
         (!empty($res['photo'])) ? $res['photo'] = getUrl($request) . $res['photo'] : '';
